@@ -1,11 +1,20 @@
 CC=gcc
-CFLAGS=-I.
+vpath %.c src
+vpath %.h include
 
-all: test1 test2
-	mv test1.o test1; mv test2.o test2
-test1:
-	$(CC) -o test1.o test1.c -I.
-test2:
-	$(CC) -o test2.o test2.c -I.
+CFLAGS=-I include
+
+.PHONY: all
+all: test1 test2 test3
+	
+test1: test1.c
+	$(CC) $< -o $@
+test2: test2.c
+	$(CC) $< -o $@
+test3: test3.c test3_func.o
+	$(CC) $(CFLAGS) $^ -o $@
+test3_func.o: test3_func.c test3_func.h
+	$(CC) -c $(CFLAGS) $<
+	
 clean:
-	rm -rf test1.o test1 test2.o test2
+	rm -rf *.o test1 test2 test3
