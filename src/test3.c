@@ -6,8 +6,8 @@ int main()
    int a = 5;
    int b = 10;
    struct test_struct y;
-   struct test_struct *pt1=&y;
-   struct test_struct *pt2=&y;
+   struct test_struct *pt1=NULL;
+   struct test_struct *pt2=NULL;
    y.i=15;
    printf("Inside main value of y.i :%d\n",y.i);
    TEST_FUNC(a,b,1,&pt1->i);
